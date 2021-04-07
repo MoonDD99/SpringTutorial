@@ -58,4 +58,22 @@ public class DogController {
 
         return dog;
     }
+    @PutMapping("/dogs")
+    public void renewalDogInfo(@RequestBody Dog dog){
+        dogManagementService.renewalInfo(dog);
+    }
+
+    @PutMapping("/dogs/{name}/{kind}")
+    public void renewalDogKind(
+            @PathVariable String name,
+            @PathVariable String kind){
+        dogManagementService.renewalKind(name,kind);
+    }
+
+    @PutMapping("/dogs/")
+    public void addDogMedicalRecords(
+            @RequestParam("name") String name,
+            @RequestParam("medicalRecord") String medicalRecord) {
+        dogManagementService.plusMedicalRecords(name, medicalRecord);
+    }
 }
