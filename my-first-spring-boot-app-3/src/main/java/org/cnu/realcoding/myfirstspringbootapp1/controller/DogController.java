@@ -44,18 +44,18 @@ public class DogController {
 
     @GetMapping("/dogs/name={name}/ownerName={ownerName}/ownerPhone={ownerPhoneNum}")
     public Dog getDogByAllInfo(@PathVariable String name,@PathVariable String ownerName,@PathVariable String ownerPhoneNum) throws Exception {
-       List<Dog> nameList = dogManagementService.getDogByName(name);
-       List<Dog> ownerNameList = dogManagementService.getDogByOwnerName(ownerName);
-       List<Dog> ownerPhoneNumList =  dogManagementService.getDogByOwnerPhone(ownerPhoneNum);
+        List<Dog> nameList = dogManagementService.getDogByName(name);
+        List<Dog> ownerNameList = dogManagementService.getDogByOwnerName(ownerName);
+        List<Dog> ownerPhoneNumList = dogManagementService.getDogByOwnerPhone(ownerPhoneNum);
 
-       nameList.retainAll(ownerNameList);
-       nameList.retainAll(ownerPhoneNumList);
+        nameList.retainAll(ownerNameList);
+        nameList.retainAll(ownerPhoneNumList);
 
-       Dog dog = null;
-       if(nameList.size() == 1) dog = nameList.get(0);
+        Dog dog = null;
+        if (nameList.size() == 1) dog = nameList.get(0);
 
-       if (dog == null) throw new DogNotFoundException();
+        if (dog == null) throw new DogNotFoundException();
 
-       return dog;
-
+        return dog;
+    }
 }
