@@ -3,6 +3,7 @@ package org.cnu.realcoding.myfirstspringbootapp1.controller;
 import org.cnu.realcoding.myfirstspringbootapp1.domain.Dog;
 import org.cnu.realcoding.myfirstspringbootapp1.service.DogManagementService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,5 +35,23 @@ public class DogController {
         //localhost:8003/dogs?name=moon-> @GetMapping(/dogs?name=moon) -> @RequestParam
     }
 
+    @PutMapping("/dogs")
+    public void renewalDogInfo(@RequestBody Dog dog){
+        dogManagementService.renewalInfo(dog);
+    }
+
+    @PutMapping("/dogs/{name}/{kind}")
+    public void renewalDogKind(
+            @PathVariable String name,
+            @PathVariable String kind){
+        dogManagementService.renewalKind(name,kind);
+    }
+
+    @PutMapping("/dogs/")
+    public void addDogMedicalRecords(
+            @RequestParam("name") String name,
+            @RequestParam("medicalRecord") String medicalRecord){
+        dogManagementService.plusMedicalRecords(name, medicalRecord);
+    }
 
 }
