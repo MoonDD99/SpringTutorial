@@ -4,6 +4,7 @@ import org.cnu.realcoding.myfirstspringbootapp1.domain.Dog;
 import org.cnu.realcoding.myfirstspringbootapp1.exception.DogNotFoundException;
 import org.cnu.realcoding.myfirstspringbootapp1.service.DogManagementService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -56,6 +57,5 @@ public class DogController {
        if (dog == null) throw new DogNotFoundException();
 
        return dog;
-    }
 
 }

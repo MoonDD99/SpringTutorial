@@ -49,4 +49,26 @@ public class DogManagementService {
     public List<Dog> getAllDogs(){
         return dogRepository.findAllDog();
     }
+
+    public void renewalInfo(Dog dog) {
+        Dog prevDog = getDogByName(dog.getName());
+        for(int i=0; i<dog.getMedicalRecord().size(); i++){
+            prevDog.getMedicalRecord().add(dog.getMedicalRecord().get(i));
+        }
+        List<String> newMedicalRecord = prevDog.getMedicalRecord();
+        dog.setMedicalRecord(newMedicalRecord);
+        dogRepository.changeInfo(dog);
+    }
+
+    public void renewalKind(String name, String kind) {
+        Dog prevDog = getDogByName(name);
+        prevDog.setKind(kind);
+        dogRepository.changeInfo(prevDog);
+    }
+
+    public void plusMedicalRecords(String name, String medicalRecord) {
+        Dog dog = getDogByName(name);
+        dog.getMedicalRecord().add(medicalRecord);
+        dogRepository.changeInfo(dog);
+    }
 }
