@@ -56,12 +56,21 @@ public class DogManagementService {
         return dog;
     }
 
+    public Dog getOneDogByName(String name){
+        Dog dog = dogRepository.findOneDog(name);
+
+        if(dog == null){
+            throw new DogNotFoundException();
+        }
+        return dog;
+    }
+
     public List<Dog> getAllDogs(){
         return dogRepository.findAllDog();
     }
 
     public void renewalInfo(Dog dog) {
-        Dog prevDog = (Dog) getDogByName(dog.getName());
+        Dog prevDog = getOneDogByName(dog.getName());
         for(int i=0; i<dog.getMedicalRecord().size(); i++){
             prevDog.getMedicalRecord().add(dog.getMedicalRecord().get(i));
         }
@@ -71,13 +80,13 @@ public class DogManagementService {
     }
 
     public void renewalKind(String name, String kind) {
-        Dog prevDog = (Dog) getDogByName(name);
+        Dog prevDog = getOneDogByName(name);
         prevDog.setKind(kind);
         dogRepository.changeInfo(prevDog);
     }
 
     public void plusMedicalRecords(String name, String medicalRecord) {
-        Dog dog = (Dog) getDogByName(name);
+        Dog dog = getOneDogByName(name);
         dog.getMedicalRecord().add(medicalRecord);
         dogRepository.changeInfo(dog);
     }
