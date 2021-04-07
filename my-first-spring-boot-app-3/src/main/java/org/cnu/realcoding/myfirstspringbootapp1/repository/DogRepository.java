@@ -1,6 +1,7 @@
 package org.cnu.realcoding.myfirstspringbootapp1.repository;
 
 import org.cnu.realcoding.myfirstspringbootapp1.domain.Dog;
+import org.cnu.realcoding.myfirstspringbootapp1.exception.DogNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -31,4 +32,11 @@ public class DogRepository {
         return mongoTemplate.findAll(Dog.class);
     }
 
+    public void changeInfo(Dog dog) {
+        mongoTemplate
+                .findAndReplace(
+                        Query.query(Criteria.where("name").is(dog.getName())),
+                        dog
+                );
+    }
 }
