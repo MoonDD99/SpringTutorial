@@ -15,6 +15,12 @@ public class DogRepository {
 
     @Autowired
     private MongoTemplate mongoTemplate;
+    public Dog findOneDog(String name) {
+        return mongoTemplate.findOne(
+                Query.query(Criteria.where("name").is(name)),
+                Dog.class
+        );
+    }
     public List<Dog> findDog(String name){
         return mongoTemplate.find(
                 Query.query(Criteria.where("name").is(name)),
